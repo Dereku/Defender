@@ -1,0 +1,7 @@
+name: Defender
+main: ru.Sonicxd2.PubDefender.Main
+author: Sonicxd2
+version: 1.0
+commands:
+  stats:
+    description: Статистика защиты. 
