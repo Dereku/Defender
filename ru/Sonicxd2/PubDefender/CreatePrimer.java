@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * License header. Remove it, if you haven't select license.
  */
 package ru.Sonicxd2.PubDefender;
 
@@ -16,43 +14,43 @@ import org.bukkit.event.player.PlayerJoinEvent;
  *
  * @author Yaroslav
  */
-public class CreatePrimer implements Listener{
-    @EventHandler
-    public void onJoin(PlayerJoinEvent e){
-        CreatePrimer(e.getPlayer());
-    }
-    
-    public void CreatePrimer(Player p){
-        Random r=new Random();
-        String finalMessage=Messages.primer;
-        Integer first=r.nextInt(100);
-        finalMessage.replaceAll("%num1%", first.toString());
+
+//Maybe, "CreateExample"?
+public class CreatePrimer implements Listener {
+
+    Random r = new Random();
+
+    //Maybe, "createExample"?
+    public void createPrimer(Player p) {
+        Integer first = r.nextInt(100);
+        Integer two = r.nextInt(50);
+        String finalMessage = Messages.primer
+                .replace("%num1%", first.toString())
+                .replace("%num2%", two.toString());
+
+        Results.popitok.put(p, 3);
+        Integer znak = r.nextInt(3); // 0...2
         
-        Integer two=r.nextInt(50);
-        finalMessage.replaceAll("%num2%", two.toString());
-        Main.getInstance().results.popitok.put(p, 3);
-        Integer znak=r.nextInt(3);
-        if(znak==1){
-            Main.getInstance().results.results.put(p, first+two); //+
+        //Switch?
+        if (znak == 1) {
+            Results.results.put(p, first + two); //+
             p.sendMessage(finalMessage.replaceAll("%znak%", Messages.sum));
-            return;
-        }
-        
-        if(znak==2){
-            Main.getInstance().results.results.put(p, first-two); //-
+        } else if (znak == 2) {
+            Results.results.put(p, first - two); //-
             p.sendMessage(finalMessage.replaceAll("%znak%", Messages.min));
-            return;
-        }
-        
-        if(znak==3){
-            Main.getInstance().results.results.put(p, first*two); //*
+        } else if (znak == 3) { 
+            Results.results.put(p, first * two); //*
             p.sendMessage(finalMessage.replaceAll("%znak%", Messages.umn));
-            return;
         }
     }
-    
+
     @EventHandler
-    public void onPrePressCommand(PlayerCommandPreprocessEvent e){
+    public void onJoin(PlayerJoinEvent e) {
+        createPrimer(e.getPlayer());
+    }
+
+    @EventHandler
+    public void onPrePressCommand(PlayerCommandPreprocessEvent e) {
         e.setCancelled(true);
     }
 }
