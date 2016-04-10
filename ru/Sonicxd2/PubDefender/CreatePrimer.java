@@ -1,5 +1,5 @@
 /*
- * License header. Remove it, if you haven't select license.
+ * Заголовок лицензии. Удали его, если ты не выбрал лицензию.
  */
 package ru.Sonicxd2.PubDefender;
 
